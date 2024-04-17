@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 206 98% 95%;
+    --foreground: 206 20% 20%; /* Poboljšan kontrast za tekst */
+    --card: 206 80% 98%; /* Malo svetlije za bolje razlikovanje */
+    --card-foreground: 206 30% 15%; /* Tamniji tekst za bolju čitljivost */
+    --popover: 206 90% 100%; /* Svetao, za izdvajanje bez ometanja */
+    --popover-foreground: 206 25% 20%; /* Kontrastan tekst unutar popover-a */
+    --primary: 206 100% 35%; /* Jača, izražajnija primarna boja */
+    --primary-foreground: 0 0% 100%; /* Beli tekst za visok kontrast */
+    --secondary: 206 50% 60%; /* Suptilnija, ali razlikovita */
+    --secondary-foreground: 0 0% 0%; /* Crni tekst za bolju vidljivost */
+    --muted: 168 20% 90%;
+    --muted-foreground: 206 40% 30%;
+    --accent: 168 60% 70%;
+    --accent-foreground: 206 50% 10%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 206 60% 95%;
+    --border: 206 40% 80%;
+    --input: 206 40% 90%;
+    --ring: 206 100% 40%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 206 30% 12%;
+    --foreground: 206 60% 95%;
+    --card: 206 45% 18%;
+    --card-foreground: 206 70% 95%;
+    --popover: 206 40% 15%;
+    --popover-foreground: 206 80% 95%;
+    --primary: 206 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 206 60% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 168 25% 30%;
+    --muted-foreground: 206 70% 75%;
+    --accent: 168 50% 40%;
+    --accent-foreground: 206 80% 95%;
+    --destructive: 0 100% 55%;
+    --destructive-foreground: 206 80% 95%;
+    --border: 206 50% 30%;
+    --input: 206 50% 25%;
+    --ring: 206 100% 50%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply m-0 bg-background font-sans text-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--foreground));
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--secondary-foreground));
+  }
+}
