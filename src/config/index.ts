@@ -1,4 +1,4 @@
-import { InfoIcon, List, Target } from 'lucide-react'
+import { List, Target } from 'lucide-react'
 
 import { ThemeEnum } from '@/types'
 
@@ -18,31 +18,17 @@ export const APP_DEFAULT = {
 
 export const ROUTES = {
   PUBLIC: {
-    LANDING: {
+    NEWS: {
       LABEL: '',
-      PATH: '',
-      NAV_ITEM: true,
-      ICON: null
-    }
-  },
-  PROTECTED: {
-    APP: {
-      LABEL: '',
-      PATH: 'app',
+      PATH: 'news',
       NAV_ITEM: true,
       ICON: null
     },
-    POSTS: {
-      LABEL: 'Posts',
+    FEED: {
+      LABEL: 'FEED',
       PATH: '',
       NAV_ITEM: false,
       ICON: List
-    },
-    ABOUT: {
-      LABEL: 'About',
-      PATH: 'about',
-      NAV_ITEM: false,
-      ICON: InfoIcon
     }
   }
 }
@@ -51,11 +37,6 @@ export const THEME = {
   TOGGLER_LABEL: 'Toggle theme',
   INITIAL: ThemeEnum.System,
   LOCAL_STORAGE_KEY: 'theme'
-}
-
-export const LANDING = {
-  ACTION_BUTTON_LABEL: `Get Started`,
-  PROJECT_REPO_LABEL: `Github Repo`
 }
 
 export const POSTS = {

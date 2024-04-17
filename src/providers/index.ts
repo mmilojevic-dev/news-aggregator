@@ -1,3 +1,3 @@
 export * from './app'
-export * from './global'
+export * from './layout'
 export * from './theme'

@@ -28,7 +28,7 @@ export const Table = <Entry extends object>({
   return (
     <div className="max-h-[65vh] w-full overflow-auto">
       <table className="min-w-full divide-y divide-border text-sm">
-        <thead className="sticky top-0 z-10 bg-background text-foreground">
+        <thead className="sticky top-0 z-10 bg-card text-card-foreground">
           <tr>
             {columns.map((col) => (
               <th

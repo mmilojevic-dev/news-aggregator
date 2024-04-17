@@ -6,8 +6,8 @@ import { ROUTES } from '@/config'
 export const Navigation: React.FC = () => {
   const navigationItems = React.useMemo(
     () =>
-      Object.keys(ROUTES.PROTECTED)
-        .map((key) => ROUTES.PROTECTED[key as keyof typeof ROUTES.PROTECTED])
+      Object.keys(ROUTES.PUBLIC)
+        .map((key) => ROUTES.PUBLIC[key as keyof typeof ROUTES.PUBLIC])
         .filter((route) => !route.NAV_ITEM),
     []
   )

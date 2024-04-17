@@ -1,25 +1,22 @@
 import { Navigate, useRoutes } from 'react-router-dom'
 
-import { protectedRoutes } from './protected'
+import { ROUTES } from '@/config'
+
 import { publicRoutes } from './public'
 
 export const AppRoutes = () => {
-  // const auth = { user: true }
-
   const commonRoutes = [
     {
       path: '*',
-      element: <Navigate to="." />
+      element: <Navigate to="/" />
+    },
+    {
+      path: '/',
+      element: <Navigate to={`/${ROUTES.PUBLIC.NEWS.PATH}`} />
     }
   ]
 
-  // const routes = auth.user ? protectedRoutes : publicRoutes
-
-  const routes = useRoutes([
-    ...protectedRoutes,
-    ...publicRoutes,
-    ...commonRoutes
-  ])
+  const routes = useRoutes([...publicRoutes, ...commonRoutes])
 
   return <>{routes}</>
 }
