@@ -9,9 +9,7 @@ export const LoadingFallback: React.FC<LoadingFallbackProps> = ({
   fullscreen = false
 }) => {
   return (
-    <div
-      className={cn('relative', fullscreen ? 'w-screen h-screen' : 'size-full')}
-    >
+    <div className={cn('relative', fullscreen ? 'h-lvh w-lvw' : 'size-full')}>
       <div className="absolute inset-0 flex items-center justify-center bg-background">
         <Spinner size="xl" />
       </div>

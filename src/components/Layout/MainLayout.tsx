@@ -7,7 +7,7 @@ export const MainLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { isOpen, toggle } = useOpenClose()
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-dvh overflow-hidden">
       <MobileDrawer isOpen={isOpen} setIsOpen={toggle} />
       <div className="hidden md:flex">
         <Sidebar className="hidden md:flex md:shrink-0" />

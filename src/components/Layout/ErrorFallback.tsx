@@ -8,7 +8,7 @@ type ErrorFallbackProps = {
 export const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error }) => {
   return (
     <div
-      className="flex h-screen w-screen flex-col items-center justify-center gap-6"
+      className="flex h-lvh w-lvw flex-col items-center justify-center gap-6"
       role="alert"
     >
       <h1 className="font-bold text-foreground">{ERRORS.FALLBACK_TEXT}</h1>

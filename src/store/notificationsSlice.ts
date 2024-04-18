@@ -1,10 +1,10 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 
-import { NotificationType } from '@/types'
+import { NotificationEnum } from '@/types'
 
 interface Notification {
   id: string
-  type: NotificationType
+  type: NotificationEnum
   title: string
   message?: string
 }
@@ -25,7 +25,7 @@ const notificationSlice = createSlice({
       reducer: (state, action: PayloadAction<Notification>) => {
         state.currentNotifications.push(action.payload)
       },
-      prepare: (type: NotificationType, title: string, message?: string) => ({
+      prepare: (type: NotificationEnum, title: string, message?: string) => ({
         payload: {
           id: nanoid(),
           type,
