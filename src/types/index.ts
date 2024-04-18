@@ -1,25 +1,41 @@
 export enum ThemeEnum {
-  Dark = 'dark',
-  Light = 'light',
-  System = 'system'
+  Dark = 'Dark',
+  Light = 'Light',
+  System = 'System'
 }
 
-export type ThemeType = ThemeEnum.Dark | ThemeEnum.Light | ThemeEnum.System
-
 export interface ThemeContextInterface {
-  theme: ThemeType
-  setTheme: (theme: ThemeType) => void
+  theme: ThemeEnum
+  setTheme: (theme: ThemeEnum) => void
 }
 
 export enum NotificationEnum {
-  Info = 'info',
-  Success = 'success',
-  Warning = 'warning',
-  Error = 'error'
+  Info = 'INFO',
+  Success = 'SUCCESS',
+  Warning = 'WARNING',
+  Error = 'ERROR'
 }
 
-export type NotificationType =
-  | NotificationEnum.Info
-  | NotificationEnum.Success
-  | NotificationEnum.Warning
-  | NotificationEnum.Error
+export type DataSourceConfigParamType = {
+  NAME: string
+  VALUE: string
+}
+
+export type DataSourceConfigType = {
+  QUERY_KEY: string
+  BASE_URL: string
+  ENDPOINT: string
+  PARAMS: {
+    API_KEY: DataSourceConfigParamType
+    SEARCH: DataSourceConfigParamType
+  }
+}
+
+export enum DataSourceNameEnum {
+  GUARDIAN = 'GUARDIAN',
+  NEWSAPI = 'NEWSAPI'
+}
+
+export type FeedData = {
+  [key in DataSourceNameEnum]: DataSourceConfigType
+}
