@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import {
   Card,
   CardContent,
@@ -7,26 +9,28 @@ import {
   CardTitle
 } from '@/components'
 
-import { ArticleType } from '../types'
+import { ArticleTypeUniformed } from '../types'
 
 type ArticleProps = {
-  data?: ArticleType
+  data?: ArticleTypeUniformed
 }
 
 export const Article = ({ data }: ArticleProps) => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{data?.webTitle}</CardTitle>
-        <CardDescription>{data?.webPublicationDate}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>{data?.webUrl}</p>
-      </CardContent>
-      <CardFooter>
-        <p>{data?.sectionName}</p>
-        <p>{data?.pillarName}</p>
-      </CardFooter>
-    </Card>
+    <Link to={data?.link ?? ''} target="_blank">
+      <Card>
+        <CardHeader>
+          <CardTitle>{data?.title}</CardTitle>
+          <CardDescription>{data?.date.toLocaleString()}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>{data?.text}</p>
+        </CardContent>
+        <CardFooter className="justify-between">
+          <p>{data?.author}</p>
+          <p>{data?.source}</p>
+        </CardFooter>
+      </Card>
+    </Link>
   )
 }

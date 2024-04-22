@@ -1,27 +1,22 @@
-import React from 'react'
-
 import { List, LoadingFallback } from '@/components'
+import { AsyncStatusEnum } from '@/types'
 
-import { useArticles } from '../api/getArticles'
-import { ArticleType } from '../types'
+import { useArticles } from '../hooks/useArticles'
+import { ArticleTypeUniformed } from '../types'
 import { Article } from './Article'
 
 export const ArticlesList = () => {
-  const articlesQuery = useArticles()
+  const { articles, status } = useArticles()
 
-  React.useEffect(() => {
-    console.log(articlesQuery.data)
-  }, [articlesQuery])
-
-  if (articlesQuery.isLoading) {
+  if (status === AsyncStatusEnum.Loading) {
     return <LoadingFallback />
   }
 
-  if (!articlesQuery.data) return null
+  if (!articles) return null
 
   return (
-    <List<ArticleType>
-      data={articlesQuery.data.response.results}
+    <List<ArticleTypeUniformed>
+      data={articles}
       renderItem={({ item }) => <Article key={item?.id} data={item} />}
     />
   )

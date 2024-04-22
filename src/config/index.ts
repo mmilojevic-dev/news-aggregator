@@ -1,6 +1,6 @@
 import { List, Target } from 'lucide-react'
 
-import { FeedData, ThemeEnum } from '@/types'
+import { FeedSource, ThemeEnum } from '@/types'
 
 export const APP_DEFAULT = {
   AUTHOR: 'Miloš Milojević',
@@ -35,36 +35,40 @@ export const THEME = {
   LOCAL_STORAGE_KEY: 'theme'
 }
 
-export const FEED: { TITLE: string; DATA: FeedData } = {
+export const FEED: { TITLE: string; SOURCE: FeedSource } = {
   TITLE: 'Feed',
-  DATA: {
+  SOURCE: {
     GUARDIAN: {
-      QUERY_KEY: 'guardian',
-      BASE_URL: 'https://content.guardianapis.com/',
+      BASE_URL: 'https://content.guardianapis.com',
       ENDPOINT: 'search',
       PARAMS: {
-        API_KEY: {
-          NAME: 'api-key',
-          VALUE: process.env.REACT_APP_GUARDIAN_API_KEY || ''
-        },
-        SEARCH: {
-          NAME: 'q',
-          VALUE: ''
+        DEFAULT: {
+          'show-fields': 'publication,trailText,headline,thumbnail,short-url',
+          'show-tags': 'contributor',
+          lang: 'en',
+          'page-size': '5',
+          'api-key': process.env.REACT_APP_GUARDIAN_API_KEY || ''
         }
       }
     },
     NEWSAPI: {
-      QUERY_KEY: 'newsapi',
-      BASE_URL: 'https://newsapi.org/v2/',
+      BASE_URL: 'https://newsapi.org/v2',
       ENDPOINT: 'everything',
       PARAMS: {
-        API_KEY: {
-          NAME: 'apiKey',
-          VALUE: process.env.REACT_APP_NEWSAPI_API_KEY || ''
-        },
-        SEARCH: {
-          NAME: 'q',
-          VALUE: ''
+        DEFAULT: {
+          q: 'random',
+          apiKey: process.env.REACT_APP_NEWSAPI_KEY || '',
+          pageSize: '5'
+        }
+      }
+    },
+    NYTIMES: {
+      BASE_URL: 'https://api.nytimes.com/svc/search/v2',
+      ENDPOINT: 'articlesearch.json',
+      PARAMS: {
+        DEFAULT: {
+          'page-size': '5',
+          'api-key': process.env.REACT_APP_NYTIMES_API_KEY || ''
         }
       }
     }

@@ -1,13 +1,11 @@
-export type ArticleType = {
+export type ArticleTypeUniformed = {
   id: string
-  type: string
-  sectionId: string
-  sectionName: string
-  webPublicationDate: string
-  webTitle: string
-  webUrl: string
-  apiUrl: string
-  isHosted: boolean
-  pillarId: string
-  pillarName: string
+  date: Date
+  category: string
+  author: string
+  source: string
+  title: string
+  text: string
+  image: string
+  link: string
 }
