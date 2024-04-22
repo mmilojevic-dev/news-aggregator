@@ -1,11 +1,11 @@
 import { ContentLayout } from '@/components'
-import { FEED } from '@/config'
+import { ARTICLES } from '@/config'
 
 import { ArticlesList } from '../components/ArticlesList'
 
-export const Feed = () => {
+export const Articles = () => {
   return (
-    <ContentLayout title={FEED.TITLE}>
+    <ContentLayout title={ARTICLES.TITLE}>
       <div className="mt-4">
         <ArticlesList />
       </div>

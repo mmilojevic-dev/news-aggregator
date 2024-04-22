@@ -5,12 +5,12 @@ const { LayoutProvider } = lazyImport(
   () => import('@/providers'),
   'LayoutProvider'
 )
-const { Feed } = lazyImport(() => import('@/features/feed'), 'Feed')
+const { Articles } = lazyImport(() => import('@/features/articles'), 'Articles')
 
 export const publicRoutes = [
   {
     path: ROUTES.PUBLIC.NEWS.PATH,
     element: <LayoutProvider />,
-    children: [{ path: ROUTES.PUBLIC.FEED.PATH, element: <Feed /> }]
+    children: [{ path: ROUTES.PUBLIC.ARTICLES.PATH, element: <Articles /> }]
   }
 ]

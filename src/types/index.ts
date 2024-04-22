@@ -43,6 +43,6 @@ export enum SourceNameEnum {
   NYTimes = 'NYTIMES'
 }
 
-export type FeedSource = {
+export type ArticlesSourceType = {
   [key in SourceNameEnum]: SourceConfigType
 }

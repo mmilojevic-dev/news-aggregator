@@ -1,15 +1,15 @@
 import React from 'react'
 
-import { ArticleTypeUniformed } from '@/features/feed'
+import { AsyncStatusEnum } from '@/types'
+import { handleError } from '@/utils'
+
+import { getAllArticles } from '../api/getAllArticles'
+import { ArticleTypeUniformed } from '../types'
 import {
   normalizeGuardianArticles,
   normalizeNewsApiArticles,
   normalizeNYTimesArticles
-} from '@/features/feed/utils/responseNormalizers'
-import { AsyncStatusEnum } from '@/types'
-import { handleError } from '@/utils'
-
-import { getNewsSources } from '../api/getFeedSources'
+} from '../utils/responseNormalizers'
 
 export const useArticles = () => {
   const [articles, setArticles] = React.useState<ArticleTypeUniformed[]>([])
@@ -19,7 +19,7 @@ export const useArticles = () => {
 
   React.useEffect(() => {
     setStatus(AsyncStatusEnum.Loading)
-    getNewsSources()
+    getAllArticles()
       .then(({ guardianResponse, newsApiResponse, nyTimesResponse }) => {
         const normalizedArticles = [
           ...normalizeGuardianArticles(guardianResponse.response.results),

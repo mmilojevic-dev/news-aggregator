@@ -1,6 +1,6 @@
 import { List, Target } from 'lucide-react'
 
-import { FeedSource, ThemeEnum } from '@/types'
+import { ArticlesSourceType, ThemeEnum } from '@/types'
 
 export const APP_DEFAULT = {
   AUTHOR: 'Miloš Milojević',
@@ -20,8 +20,8 @@ export const ROUTES = {
       NAV_ITEM: true,
       ICON: null
     },
-    FEED: {
-      LABEL: 'FEED',
+    ARTICLES: {
+      LABEL: 'ARTICLES',
       PATH: '',
       NAV_ITEM: false,
       ICON: List
@@ -35,8 +35,8 @@ export const THEME = {
   LOCAL_STORAGE_KEY: 'theme'
 }
 
-export const FEED: { TITLE: string; SOURCE: FeedSource } = {
-  TITLE: 'Feed',
+export const ARTICLES: { TITLE: string; SOURCE: ArticlesSourceType } = {
+  TITLE: 'Articles',
   SOURCE: {
     GUARDIAN: {
       BASE_URL: 'https://content.guardianapis.com',
