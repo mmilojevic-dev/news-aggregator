@@ -1,11 +1,12 @@
 import { useQueries } from '@tanstack/react-query'
 import React from 'react'
 
+import { FiltersFormSchemaType } from '@/features/filters'
 import { AsyncStatusEnum } from '@/types'
 import { handleError } from '@/utils'
 
 import { getArticles } from '../api/getArticles'
-import { ArticleType, FiltersFormSchemaType, SourceNameEnum } from '../types'
+import { ArticleType, SourceNameEnum } from '../types'
 import { normalizeArticles } from '../utils/responseNormalizers'
 
 export const useArticles = (filters: FiltersFormSchemaType) => {

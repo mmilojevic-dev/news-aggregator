@@ -1,78 +1,12 @@
 import { nanoid } from '@reduxjs/toolkit'
-import { z } from 'zod'
 
-import {
-  ArticlesConfigType,
-  FilterConfigType,
-  FiltersConfigType,
-  SourceConfigType,
-  SourceNameEnum
-} from '../types'
+import { filtersConfig } from '@/features/filters'
 
-export const searchFilterConfig: FilterConfigType = {
-  name: 'search',
-  placeholder: 'Search articles...'
-}
-
-export const categoryFilterConfig: FilterConfigType = {
-  name: 'category',
-  placeholder: 'Select category:',
-  options: [
-    { label: 'Business', value: 'business' },
-    { label: 'Culture', value: 'culture' },
-    { label: 'Education', value: 'education' },
-    { label: 'Politics', value: 'politics' },
-    { label: 'Science', value: 'science' },
-    { label: 'Society', value: 'society' },
-    { label: 'Sport', value: 'sport' },
-    { label: 'Technology', value: 'technology' }
-  ]
-}
-
-export const sourceFilterConfig: FilterConfigType = {
-  name: 'source',
-  placeholder: 'Filter by source:',
-  options: Object.values(SourceNameEnum).map((source) => ({
-    label: source.charAt(0).toUpperCase() + source.slice(1),
-    value: source
-  }))
-}
-
-export const fromDateFilterConfig: FilterConfigType = {
-  name: 'fromDate',
-  placeholder: 'From date:'
-}
-
-export const toDateFilterConfig: FilterConfigType = {
-  name: 'toDate',
-  placeholder: 'To date:'
-}
-
-export const filtersConfig: FiltersConfigType = {
-  schema: z.object({
-    search: z.string().optional(),
-    category: z.string().optional(),
-    source: z.nativeEnum(SourceNameEnum).optional(),
-    fromDate: z.date().optional(),
-    toDate: z.date().optional()
-  }),
-  default: {
-    search: '',
-    category: '',
-    source: undefined,
-    fromDate: undefined,
-    toDate: undefined
-  },
-  fields: {
-    search: searchFilterConfig,
-    category: categoryFilterConfig,
-    source: sourceFilterConfig,
-    fromDate: fromDateFilterConfig,
-    toDate: toDateFilterConfig
-  }
-}
+import { ArticlesConfigType, SourceConfigType, SourceNameEnum } from '../types'
 
 export const guardianConfig: SourceConfigType = {
+  name: 'The Guardian',
+  domainName: 'theguardian.com',
   baseUrl: 'https://content.guardianapis.com',
   endpoint: 'search',
   defaultParams: {
@@ -103,7 +37,7 @@ export const guardianConfig: SourceConfigType = {
       date: (article: any) => new Date(article.webPublicationDate),
       image: (article: any) => article.fields.thumbnail || '',
       link: (article: any) => article.webUrl,
-      source: () => 'theguardian.com',
+      source: () => guardianConfig.domainName,
       text: (article: any) => article.fields.trailText || '',
       title: (article: any) => article.webTitle || ''
     }
@@ -111,6 +45,8 @@ export const guardianConfig: SourceConfigType = {
 }
 
 const newsApiConfig: SourceConfigType = {
+  name: 'NewsAPI',
+  domainName: 'newsapi.org',
   baseUrl: 'https://newsapi.org/v2',
   endpoint: 'everything',
   defaultParams: {
@@ -138,7 +74,7 @@ const newsApiConfig: SourceConfigType = {
       date: (article: any) => new Date(article.publishedAt),
       image: (article: any) => article.urlToImage || '',
       link: (article: any) => article.url || '',
-      source: () => 'newsapi.org',
+      source: () => newsApiConfig.domainName,
       text: (article: any) => article.description || '',
       title: (article: any) => article.title || ''
     }
@@ -146,6 +82,8 @@ const newsApiConfig: SourceConfigType = {
 }
 
 const nyTimesConfig: SourceConfigType = {
+  name: 'The New York Times',
+  domainName: 'nytimes.com',
   baseUrl: 'https://api.nytimes.com/svc/search/v2',
   endpoint: 'articlesearch.json',
   defaultParams: {
@@ -179,7 +117,7 @@ const nyTimesConfig: SourceConfigType = {
       image: (article: any) =>
         `https://static01.nyt.com/${article.multimedia?.find((media: any) => media.subtype === 'thumbLarge')?.url || ''}`,
       link: (article: any) => article.web_url || '',
-      source: () => 'nytimes.com',
+      source: () => nyTimesConfig.domainName,
       text: (article: any) => article.lead_paragraph || '',
       title: (article: any) => article.headline.main || ''
     }

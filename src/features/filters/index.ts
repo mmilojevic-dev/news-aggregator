@@ -1,3 +1,3 @@
 export * from './config'
-export * from './routes'
+export * from './hooks/useFilters'
 export * from './types'

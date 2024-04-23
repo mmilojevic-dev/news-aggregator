@@ -1,5 +1,7 @@
+import { FiltersFormSchemaType } from '@/features/filters'
+
 import { sourcesConfig } from '../config'
-import { FiltersFormSchemaType, SourceNameEnum } from '../types'
+import { SourceNameEnum } from '../types'
 
 const getApiParamValue = (
   value: any,

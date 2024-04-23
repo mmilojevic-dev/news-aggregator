@@ -1,8 +1,4 @@
-import { z } from 'zod'
-
-import { SelectOptionType } from '@/types'
-
-import { filtersConfig } from '../config'
+import { FiltersConfigType } from '@/features/filters/types'
 
 export type ArticleType = {
   id: string
@@ -27,30 +23,6 @@ export type ParamMappingEntryType =
       transform?: (value: any) => string
     }
 
-export type FiltersFormSchemaType = z.infer<typeof filtersConfig.schema>
-
-export type FilterConfigType = {
-  name: string
-  placeholder: string
-  options?: SelectOptionType[]
-}
-
-export enum FilterEnum {
-  Search = 'search',
-  Category = 'category',
-  Source = 'source',
-  FromDate = 'fromDate',
-  ToDate = 'toDate'
-}
-
-export type FiltersConfigType = {
-  schema: any
-  default: FiltersFormSchemaType
-  fields: Record<FilterEnum, FilterConfigType>
-}
-
-export type QueryParamsType = Record<string, string>
-
 export type NormalizationConfigType = {
   responseEntryPath: string
   article: ArticleNormalizationType<ArticleType>
@@ -62,6 +34,8 @@ export type SourceConfigType = {
   defaultParams: Record<string, string>
   paramMappings: Record<string, ParamMappingEntryType>
   normalization: NormalizationConfigType
+  name: string
+  domainName: string
 }
 
 export enum SourceNameEnum {
