@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit'
 import { z } from 'zod'
 
 import {
@@ -28,6 +29,15 @@ export const categoryFilterConfig: FilterConfigType = {
   ]
 }
 
+export const sourceFilterConfig: FilterConfigType = {
+  name: 'source',
+  placeholder: 'Filter by source:',
+  options: Object.values(SourceNameEnum).map((source) => ({
+    label: source.charAt(0).toUpperCase() + source.slice(1),
+    value: source
+  }))
+}
+
 export const fromDateFilterConfig: FilterConfigType = {
   name: 'fromDate',
   placeholder: 'From date:'
@@ -41,19 +51,22 @@ export const toDateFilterConfig: FilterConfigType = {
 export const filtersConfig: FiltersConfigType = {
   schema: z.object({
     search: z.string().optional(),
+    category: z.string().optional(),
+    source: z.nativeEnum(SourceNameEnum).optional(),
     fromDate: z.date().optional(),
-    toDate: z.date().optional(),
-    category: z.string().optional()
+    toDate: z.date().optional()
   }),
   default: {
     search: '',
+    category: '',
+    source: undefined,
     fromDate: undefined,
-    toDate: undefined,
-    category: ''
+    toDate: undefined
   },
   fields: {
     search: searchFilterConfig,
     category: categoryFilterConfig,
+    source: sourceFilterConfig,
     fromDate: fromDateFilterConfig,
     toDate: toDateFilterConfig
   }
@@ -66,7 +79,7 @@ export const guardianConfig: SourceConfigType = {
     'show-fields': 'publication,trailText,headline,thumbnail,short-url',
     'show-tags': 'contributor',
     lang: 'en',
-    'page-size': '5',
+    'page-size': '10',
     'api-key': process.env.REACT_APP_GUARDIAN_API_KEY || ''
   },
   paramMappings: {
@@ -90,7 +103,7 @@ export const guardianConfig: SourceConfigType = {
       date: (article: any) => new Date(article.webPublicationDate),
       image: (article: any) => article.fields.thumbnail || '',
       link: (article: any) => article.webUrl,
-      source: () => 'The Guardian',
+      source: () => 'theguardian.com',
       text: (article: any) => article.fields.trailText || '',
       title: (article: any) => article.webTitle || ''
     }
@@ -103,7 +116,7 @@ const newsApiConfig: SourceConfigType = {
   defaultParams: {
     q: 'a',
     apiKey: process.env.REACT_APP_NEWSAPI_KEY || '',
-    pageSize: '5'
+    pageSize: '10'
   },
   paramMappings: {
     search: 'q',
@@ -119,13 +132,13 @@ const newsApiConfig: SourceConfigType = {
   normalization: {
     responseEntryPath: 'articles',
     article: {
-      id: (article: any) => article.publishedAt,
+      id: () => nanoid(),
       author: (article: any) => article.author || 'Unknown Author',
       category: (article: any) => article.category || '',
       date: (article: any) => new Date(article.publishedAt),
       image: (article: any) => article.urlToImage || '',
-      link: (article: any) => article.url,
-      source: (article: any) => article.source.name,
+      link: (article: any) => article.url || '',
+      source: () => 'newsapi.org',
       text: (article: any) => article.description || '',
       title: (article: any) => article.title || ''
     }
@@ -165,8 +178,8 @@ const nyTimesConfig: SourceConfigType = {
       date: (article: any) => new Date(article.pub_date),
       image: (article: any) =>
         `https://static01.nyt.com/${article.multimedia?.find((media: any) => media.subtype === 'thumbLarge')?.url || ''}`,
-      link: (article: any) => article.web_url,
-      source: () => 'NYTimes',
+      link: (article: any) => article.web_url || '',
+      source: () => 'nytimes.com',
       text: (article: any) => article.lead_paragraph || '',
       title: (article: any) => article.headline.main || ''
     }

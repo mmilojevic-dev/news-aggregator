@@ -1,5 +1,5 @@
 import { useQueries } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import React from 'react'
 
 import { AsyncStatusEnum } from '@/types'
 import { handleError } from '@/utils'
@@ -9,11 +9,16 @@ import { ArticleType, FiltersFormSchemaType, SourceNameEnum } from '../types'
 import { normalizeArticles } from '../utils/responseNormalizers'
 
 export const useArticles = (filters: FiltersFormSchemaType) => {
-  const [articles, setArticles] = useState<ArticleType[]>([])
-  const [status, setStatus] = useState<AsyncStatusEnum>(AsyncStatusEnum.Idle)
+  const [articles, setArticles] = React.useState<ArticleType[]>([])
+  const [status, setStatus] = React.useState<AsyncStatusEnum>(
+    AsyncStatusEnum.Idle
+  )
+  const sourcesToQuery = filters.source
+    ? [filters.source]
+    : Object.values(SourceNameEnum)
 
   const queryResults = useQueries({
-    queries: Object.values(SourceNameEnum).map((source) => ({
+    queries: sourcesToQuery.map((source) => ({
       queryKey: ['articles', source, JSON.stringify(filters)],
       queryFn: () => getArticles(source, filters),
       select: (data: any) => normalizeArticles(data, source),
@@ -23,7 +28,7 @@ export const useArticles = (filters: FiltersFormSchemaType) => {
     }))
   })
 
-  useEffect(() => {
+  React.useEffect(() => {
     const allArticles: ArticleType[] = []
     let allSuccess = true
     let anyLoading = false

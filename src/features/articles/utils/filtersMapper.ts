@@ -20,15 +20,20 @@ export const mapFiltersToApiParams = (
   const config = sourcesConfig[source]
   const paramEntries = Object.entries(config.paramMappings || {})
 
-  return paramEntries.reduce(
-    (params, [filterKey, mapping]) => {
-      const value = filters[filterKey]
-      if (value) {
-        const { apiParam, transformedValue } = getApiParamValue(value, mapping)
-        params[apiParam] = transformedValue
-      }
-      return params
-    },
-    { ...config.defaultParams }
-  )
+  return paramEntries
+    .filter(([key]) => !!filters[key])
+    .reduce(
+      (params, [filterKey, mapping]) => {
+        const value = filters[filterKey]
+        if (value) {
+          const { apiParam, transformedValue } = getApiParamValue(
+            value,
+            mapping
+          )
+          params[apiParam] = transformedValue
+        }
+        return params
+      },
+      { ...config.defaultParams }
+    )
 }

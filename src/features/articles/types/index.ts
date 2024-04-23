@@ -38,6 +38,7 @@ export type FilterConfigType = {
 export enum FilterEnum {
   Search = 'search',
   Category = 'category',
+  Source = 'source',
   FromDate = 'fromDate',
   ToDate = 'toDate'
 }

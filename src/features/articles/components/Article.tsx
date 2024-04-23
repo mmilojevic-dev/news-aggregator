@@ -18,7 +18,7 @@ type ArticleProps = {
 export const Article = ({ data }: ArticleProps) => {
   return (
     <Link to={data?.link ?? ''} target="_blank">
-      <Card>
+      <Card className="transition-colors hover:border-accent">
         <CardHeader>
           <CardTitle>{data?.title}</CardTitle>
           <CardDescription>{data?.date.toLocaleString()}</CardDescription>
