@@ -1,3 +1,5 @@
+import { UseFormReturn } from 'react-hook-form'
+
 import { DatePickerField, Form, InputField, SelectField } from '@/components'
 
 import {
@@ -6,16 +8,13 @@ import {
   searchFilterConfig,
   toDateFilterConfig
 } from '../config'
-import { useFilters } from '../hooks/useFilters'
 import { FiltersFormSchemaType } from '../types'
 
 type FiltersProps = {
-  onFilterChange: (data: FiltersFormSchemaType) => void
+  form: UseFormReturn<FiltersFormSchemaType>
 }
 
-export const Filters = ({ onFilterChange }: FiltersProps) => {
-  const { form } = useFilters(onFilterChange)
-
+export const Filters = ({ form }: FiltersProps) => {
   return (
     <Form {...form}>
       <form className="grid grid-cols-2 gap-2 md:grid-cols-4">

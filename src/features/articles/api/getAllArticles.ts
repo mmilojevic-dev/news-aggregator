@@ -1,26 +1,16 @@
 import { getData } from '@/api/getData'
 
 import { articlesConfig } from '../config'
+import { FiltersFormSchemaType, SourceNameEnum } from '../types'
+import { mapFiltersToApiParams } from '../utils/filtersMapper'
 
-export const getAllArticles = async () => {
-  const [guardianResponse, newsApiResponse, nyTimesResponse] =
-    await Promise.all([
-      getData(
-        `${articlesConfig.sources.guardian.baseUrl}/${articlesConfig.sources.guardian.endpoint}`,
-        articlesConfig.sources.guardian.params
-      ),
-      getData(
-        `${articlesConfig.sources.newsApi.baseUrl}/${articlesConfig.sources.newsApi.endpoint}`,
-        articlesConfig.sources.newsApi.params
-      ),
-      getData(
-        `${articlesConfig.sources.nyTimes.baseUrl}/${articlesConfig.sources.nyTimes.endpoint}`,
-        articlesConfig.sources.nyTimes.params
-      )
-    ])
-  return {
-    guardianResponse,
-    newsApiResponse,
-    nyTimesResponse
-  }
+export const getArticlesFromSource = async (
+  source: SourceNameEnum,
+  filters: FiltersFormSchemaType
+) => {
+  const sourceConfig = articlesConfig.sources[source]
+  const params = mapFiltersToApiParams(filters, source)
+  const fullParams = { ...sourceConfig.defaultParams, ...params }
+
+  return getData(`${sourceConfig.baseUrl}/${sourceConfig.endpoint}`, fullParams)
 }

@@ -42,7 +42,10 @@ export type QueryParamsType = Record<string, string>
 export type SourceConfigType = {
   baseUrl: string
   endpoint: string
-  params: Partial<QueryParamsType>
+  defaultParams: Record<string, string>
+  paramMappings: {
+    [key: string]: string | { key: string; transform?: (value: any) => string }
+  }
 }
 
 export enum SourceNameEnum {

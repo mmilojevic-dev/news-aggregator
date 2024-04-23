@@ -3,14 +3,14 @@ import { ArticleType } from '../types'
 export const normalizeGuardianArticles = (articles: any[]): ArticleType[] => {
   return articles.map((article) => ({
     id: article.id,
-    author: article.tags[0].webTitle || 'Unknown Author',
+    author: article.tags[0]?.webTitle || 'Unknown Author',
     category: article.pillarName || '',
     date: new Date(article.webPublicationDate),
     image: article.fields.thumbnail || '',
     link: article.webUrl || '',
     source: 'The Guardian',
     text: article.fields.trailText || '',
-    title: article.webTitle || ''
+    title: article?.webTitle || ''
   }))
 }
 
