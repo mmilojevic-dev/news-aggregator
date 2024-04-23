@@ -1,5 +1,11 @@
 import { DatePickerField, Form, InputField, SelectField } from '@/components'
 
+import {
+  categoryFilterConfig,
+  fromDateFilterConfig,
+  searchFilterConfig,
+  toDateFilterConfig
+} from '../config'
 import { useFilters } from '../hooks/useFilters'
 import { FiltersFormSchemaType } from '../types'
 
@@ -13,27 +19,27 @@ export const Filters = ({ onFilterChange }: FiltersProps) => {
   return (
     <Form {...form}>
       <form className="grid grid-cols-2 gap-2 md:grid-cols-4">
-        <InputField form={form} name="query" placeholder="Enter keyword" />
-
+        <InputField
+          form={form}
+          name={searchFilterConfig.name}
+          placeholder={searchFilterConfig.placeholder}
+        />
         <SelectField
           form={form}
-          name="category"
-          placeholder="Select category"
-          options={[
-            { label: 'Business', value: 'business' },
-            { label: 'Culture', value: 'culture' },
-            { label: 'Education', value: 'education' },
-            { label: 'Politics', value: 'politics' },
-            { label: 'Science', value: 'science' },
-            { label: 'Society', value: 'society' },
-            { label: 'Sport', value: 'sport' },
-            { label: 'Technology', value: 'technology' }
-          ]}
+          name={categoryFilterConfig.name}
+          placeholder={categoryFilterConfig.placeholder}
+          options={categoryFilterConfig.options!}
         />
-
-        <DatePickerField form={form} name="fromDate" placeholder="From" />
-
-        <DatePickerField form={form} name="toDate" placeholder="To" />
+        <DatePickerField
+          form={form}
+          name={fromDateFilterConfig.name}
+          placeholder={fromDateFilterConfig.placeholder}
+        />
+        <DatePickerField
+          form={form}
+          name={toDateFilterConfig.name}
+          placeholder={toDateFilterConfig.placeholder}
+        />
       </form>
     </Form>
   )

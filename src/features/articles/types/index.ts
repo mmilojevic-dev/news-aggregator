@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
-import { filtersFormSchema } from '@/config'
+import { SelectOptionType } from '@/types'
+
+import { filtersConfig } from '../config'
 
 export type ArticleType = {
   id: string
@@ -14,12 +16,7 @@ export type ArticleType = {
   link: string
 }
 
-export type FiltersFormSchemaType = z.infer<typeof filtersFormSchema>
-
-export type SelectOptionType = {
-  label: string
-  value: string
-}
+export type FiltersFormSchemaType = z.infer<typeof filtersConfig.schema>
 
 export type FilterConfigType = {
   name: string
@@ -34,7 +31,11 @@ export enum FilterEnum {
   ToDate = 'toDate'
 }
 
-export type FiltersConfigType = Record<FilterEnum, FilterConfigType>
+export type FiltersConfigType = {
+  schema: any
+  default: FiltersFormSchemaType
+  fields: Record<FilterEnum, FilterConfigType>
+}
 
 export type QueryParamsType = Record<string, string>
 

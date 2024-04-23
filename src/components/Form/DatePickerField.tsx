@@ -1,5 +1,3 @@
-'use client'
-
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { format } from 'date-fns'
 import { UseFormReturn } from 'react-hook-form'
@@ -38,7 +36,7 @@ export const DatePickerField = ({
                 <Button
                   variant="outline"
                   className={cn(
-                    'w-full text-left font-normal',
+                    'w-full justify-start font-normal',
                     !field.value && 'text-muted-foreground',
                     'hover:bg-transparent'
                   )}

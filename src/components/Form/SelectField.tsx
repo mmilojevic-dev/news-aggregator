@@ -1,5 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
 
+import { SelectOptionType } from '@/types'
 import { cn } from '@/utils'
 
 import {
@@ -11,16 +12,11 @@ import {
 } from '../Elements'
 import { FormControl, FormField } from './Form'
 
-type SelectFieldOption = {
-  value: string
-  label: string
-}
-
 export type SelectFieldProps = {
   form: UseFormReturn<any>
   name: string
   placeholder: string
-  options: SelectFieldOption[]
+  options: SelectOptionType[]
   className?: string
 }
 

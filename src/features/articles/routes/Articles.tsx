@@ -1,8 +1,8 @@
 import { ContentLayout } from '@/components'
-import { articlesConfig } from '@/config'
 
 import { ArticlesList } from '../components/ArticlesList'
 import { Filters } from '../components/Filters'
+import { articlesConfig } from '../config'
 import { useArticles } from '../hooks/useArticles'
 import { FiltersFormSchemaType } from '../types'
 

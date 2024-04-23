@@ -1,6 +1,6 @@
 import { Navigate, useRoutes } from 'react-router-dom'
 
-import { ROUTES } from '@/config'
+import { routesConfig } from '@/config'
 
 import { publicRoutes } from './public'
 
@@ -12,7 +12,7 @@ export const AppRoutes = () => {
     },
     {
       path: '/',
-      element: <Navigate to={`/${ROUTES.PUBLIC.NEWS.PATH}`} />
+      element: <Navigate to={`/${routesConfig.public.home.path}`} />
     }
   ]
 

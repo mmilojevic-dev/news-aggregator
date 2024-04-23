@@ -1,5 +1,6 @@
 import { getData } from '@/api/getData'
-import { articlesConfig } from '@/config'
+
+import { articlesConfig } from '../config'
 
 export const getAllArticles = async () => {
   const [guardianResponse, newsApiResponse, nyTimesResponse] =

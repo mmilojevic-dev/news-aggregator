@@ -1,4 +1,4 @@
-import { ROUTES } from '@/config'
+import { routesConfig } from '@/config'
 import { lazyImport } from '@/utils'
 
 const { LayoutProvider } = lazyImport(
@@ -9,8 +9,10 @@ const { Articles } = lazyImport(() => import('@/features/articles'), 'Articles')
 
 export const publicRoutes = [
   {
-    path: ROUTES.PUBLIC.NEWS.PATH,
+    path: routesConfig.public.home.path,
     element: <LayoutProvider />,
-    children: [{ path: ROUTES.PUBLIC.ARTICLES.PATH, element: <Articles /> }]
+    children: [
+      { path: routesConfig.public.articles.path, element: <Articles /> }
+    ]
   }
 ]

@@ -7,7 +7,7 @@ export const mapFiltersToApiParams = (
   switch (source) {
     case 'GUARDIAN':
       return {
-        q: filters.query || '',
+        q: filters.search || '',
         'from-date': filters.fromDate?.toISOString().split('T')[0] || '',
         'to-date': filters.toDate?.toISOString().split('T')[0] || '',
         section: filters.category || ''

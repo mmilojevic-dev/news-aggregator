@@ -24,3 +24,8 @@ export type NotificationType = {
   title: string
   message?: string
 }
+
+export type SelectOptionType = {
+  label: string
+  value: string
+}

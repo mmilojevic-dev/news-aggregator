@@ -1,4 +1,4 @@
-import { ERRORS } from '@/config'
+import { errorsConfig } from '@/config'
 import { addNotification, store } from '@/store'
 import { NotificationEnum } from '@/types'
 
@@ -11,7 +11,7 @@ export const handleError = (error: unknown) => {
   store.dispatch(
     addNotification(
       NotificationEnum.Error,
-      ERRORS.GENERAL_NETWORK,
+      errorsConfig.errorTitle,
       getErrorMessage(error)
     )
   )

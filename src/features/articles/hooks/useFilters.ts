@@ -2,9 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
-import { filtersFormSchema } from '@/config'
 import { useDebounce } from '@/hooks'
 
+import { filtersConfig } from '../config'
 import { FiltersFormSchemaType } from '../types'
 
 export type UseFiltersReturnType = ReturnType<typeof useFilters>
@@ -14,13 +14,8 @@ export function useFilters(
   debounceDelay = 500
 ) {
   const form = useForm<FiltersFormSchemaType>({
-    resolver: zodResolver(filtersFormSchema),
-    defaultValues: {
-      query: '',
-      fromDate: undefined,
-      toDate: undefined,
-      category: ''
-    },
+    resolver: zodResolver(filtersConfig.schema),
+    defaultValues: filtersConfig.default,
     mode: 'onChange'
   })
 
