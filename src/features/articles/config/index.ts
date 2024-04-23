@@ -1,8 +1,8 @@
 import { nanoid } from '@reduxjs/toolkit'
 
-import { filtersConfig } from '@/features/filters'
+import { SourceNameEnum } from '@/types'
 
-import { ArticlesConfigType, SourceConfigType, SourceNameEnum } from '../types'
+import { SourceConfigType } from '../types'
 
 export const guardianConfig: SourceConfigType = {
   name: 'The Guardian',
@@ -128,10 +128,4 @@ export const sourcesConfig: Record<SourceNameEnum, SourceConfigType> = {
   [SourceNameEnum.Guardian]: guardianConfig,
   [SourceNameEnum.NewsApi]: newsApiConfig,
   [SourceNameEnum.NYTimes]: nyTimesConfig
-}
-
-export const articlesConfig: ArticlesConfigType = {
-  title: 'Articles',
-  filters: filtersConfig,
-  sources: sourcesConfig
 }

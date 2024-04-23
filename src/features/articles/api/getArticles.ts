@@ -1,8 +1,8 @@
-import { axiosClient } from '@/lib/axios'
+import { articlesConfig, FiltersFormSchemaType } from '@/features'
+import { axiosClient } from '@/lib'
+import { SourceNameEnum } from '@/types'
 
-import { articlesConfig } from '../config'
-import { FiltersFormSchemaType, SourceNameEnum } from '../types'
-import { mapFiltersToApiParams } from '../utils/filtersMapper'
+import { mapFiltersToApiParams } from '../utils'
 
 export const getArticles = async (
   source: SourceNameEnum,

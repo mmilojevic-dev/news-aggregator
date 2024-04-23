@@ -1,10 +1,9 @@
 import { ContentLayout } from '@/components'
+import { articlesConfig } from '@/features'
+import { Filters, useFilters } from '@/features/filters'
 
-import { Filters } from '../../filters/components/Filters'
-import { useFilters } from '../../filters/hooks/useFilters'
-import { ArticlesList } from '../components/ArticlesList'
-import { articlesConfig } from '../config'
-import { useArticles } from '../hooks/useArticles'
+import { ArticlesList } from '../components'
+import { useArticles } from '../hooks'
 
 export const Articles = () => {
   const { form, filters } = useFilters()

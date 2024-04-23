@@ -29,3 +29,9 @@ export type SelectOptionType = {
   label: string
   value: string
 }
+
+export enum SourceNameEnum {
+  Guardian = 'guardian',
+  NewsApi = 'newsApi',
+  NYTimes = 'nyTimes'
+}

@@ -1,7 +1,8 @@
+import { SourceNameEnum } from '@/types'
 import { getNestedProperty } from '@/utils'
 
 import { sourcesConfig } from '../config'
-import { ArticleType, SourceNameEnum } from '../types'
+import { ArticleType } from '../types'
 
 export const normalizeArticles = (
   data: unknown[],

@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
-import { SourceNameEnum, sourcesConfig } from '@/features/articles'
+import { sourcesConfig } from '@/features/articles'
+import { SourceNameEnum } from '@/types'
 
 import { FilterConfigType, FiltersConfigType } from '../types'
 

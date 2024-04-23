@@ -2,12 +2,11 @@ import { useQueries } from '@tanstack/react-query'
 import React from 'react'
 
 import { FiltersFormSchemaType } from '@/features/filters'
-import { AsyncStatusEnum } from '@/types'
-import { handleError } from '@/utils'
+import { AsyncStatusEnum, SourceNameEnum } from '@/types'
 
-import { getArticles } from '../api/getArticles'
-import { ArticleType, SourceNameEnum } from '../types'
-import { normalizeArticles } from '../utils/responseNormalizers'
+import { getArticles } from '../api'
+import { ArticleType } from '../types'
+import { normalizeArticles } from '../utils'
 
 export const useArticles = (filters: FiltersFormSchemaType) => {
   const [articles, setArticles] = React.useState<ArticleType[]>([])
@@ -22,10 +21,7 @@ export const useArticles = (filters: FiltersFormSchemaType) => {
     queries: sourcesToQuery.map((source) => ({
       queryKey: ['articles', source, JSON.stringify(filters)],
       queryFn: () => getArticles(source, filters),
-      select: (data: any) => normalizeArticles(data, source),
-      onError: (error: Error) => {
-        handleError(new Error(`Error fetching data from ${source}:`, error))
-      }
+      select: (data: any) => normalizeArticles(data, source)
     }))
   })
 

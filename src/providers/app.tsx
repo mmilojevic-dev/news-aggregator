@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import { ErrorFallback, LoadingFallback, Notifications } from '@/components'
-import { queryClient } from '@/lib/react-query'
+import { queryClient } from '@/lib'
 import { store } from '@/store'
 
 import { Theme } from './theme'

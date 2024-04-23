@@ -14,8 +14,8 @@ import {
   searchFilterConfig,
   sourceFilterConfig,
   toDateFilterConfig
-} from '../../articles/config'
-import { FiltersFormSchemaType } from '../../articles/types'
+} from '../config'
+import { FiltersFormSchemaType } from '../types'
 
 type FiltersProps = {
   form: UseFormReturn<FiltersFormSchemaType>

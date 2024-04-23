@@ -1,4 +1,7 @@
-import { FiltersConfigType } from '@/features/filters/types'
+import { filtersConfig, FiltersConfigType } from '@/features/filters'
+import { SourceNameEnum } from '@/types'
+
+import { sourcesConfig } from '../config'
 
 export type ArticleType = {
   id: string
@@ -28,6 +31,12 @@ export type NormalizationConfigType = {
   article: ArticleNormalizationType<ArticleType>
 }
 
+export type ArticlesConfigType = {
+  title: string
+  filters: FiltersConfigType
+  sources: Record<SourceNameEnum, SourceConfigType>
+}
+
 export type SourceConfigType = {
   baseUrl: string
   endpoint: string
@@ -38,16 +47,8 @@ export type SourceConfigType = {
   domainName: string
 }
 
-export enum SourceNameEnum {
-  Guardian = 'guardian',
-  NewsApi = 'newsApi',
-  NYTimes = 'nyTimes'
-}
-
-export type SourcesConfigType = Record<SourceNameEnum, SourceConfigType>
-
-export type ArticlesConfigType = {
-  title: string
-  filters: FiltersConfigType
-  sources: SourcesConfigType
+export const articlesConfig: ArticlesConfigType = {
+  title: 'Articles',
+  filters: filtersConfig,
+  sources: sourcesConfig
 }

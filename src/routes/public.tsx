@@ -5,7 +5,7 @@ const { LayoutProvider } = lazyImport(
   () => import('@/providers'),
   'LayoutProvider'
 )
-const { Articles } = lazyImport(() => import('@/features/articles'), 'Articles')
+const { Articles } = lazyImport(() => import('@/features'), 'Articles')
 
 export const publicRoutes = [
   {
