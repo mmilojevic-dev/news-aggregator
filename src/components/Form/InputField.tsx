@@ -1,35 +1,24 @@
-import { UseFormRegisterReturn } from 'react-hook-form'
+import { UseFormReturn } from 'react-hook-form'
 
-import { FieldWrapper, FieldWrapperPassThroughProps } from '@/components'
-import { cn } from '@/utils'
+import { Input } from '../Elements'
+import { FormControl, FormField } from './Form'
 
-type InputFieldProps = FieldWrapperPassThroughProps & {
-  type?: 'text' | 'email' | 'password'
-  className?: string
-  registration: Partial<UseFormRegisterReturn>
+export type InputFieldProps = {
+  form: UseFormReturn<any>
+  name: string
   placeholder: string
 }
 
-export const InputField = ({
-  placeholder,
-  type = 'text',
-  className,
-  registration,
-  error
-}: InputFieldProps) => {
+export const InputField = ({ form, name, placeholder }: InputFieldProps) => {
   return (
-    <FieldWrapper error={error}>
-      <input
-        type={type}
-        className={cn(
-          `block w-full appearance-none rounded-md border px-3 py-2
-          placeholder:text-muted-foreground focus:border-accent focus:outline-none
-          focus:ring-accent sm:text-sm bg-transparent`,
-          className
-        )}
-        placeholder={placeholder}
-        {...registration}
-      />
-    </FieldWrapper>
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormControl>
+          <Input className="h-auto" placeholder={placeholder} {...field} />
+        </FormControl>
+      )}
+    />
   )
 }

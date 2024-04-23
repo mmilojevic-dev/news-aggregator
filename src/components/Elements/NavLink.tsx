@@ -3,10 +3,10 @@ import { NavLink as RouterNavLink, useLocation } from 'react-router-dom'
 import { ROUTES } from '@/config'
 import { cn } from '@/utils'
 
-type ProtectedRouteKey = keyof typeof ROUTES.PROTECTED
+type ProtectedRouteKey = keyof typeof ROUTES.PUBLIC
 
 type NavLinkProps = {
-  route: (typeof ROUTES.PROTECTED)[ProtectedRouteKey]
+  route: (typeof ROUTES.PUBLIC)[ProtectedRouteKey]
 }
 
 export const NavLink = ({ route }: NavLinkProps) => {

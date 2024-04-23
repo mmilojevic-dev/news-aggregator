@@ -1,8 +1,6 @@
-import { ArticleTypeUniformed } from '../types'
+import { ArticleType } from '../types'
 
-export const normalizeGuardianArticles = (
-  articles: any[]
-): ArticleTypeUniformed[] => {
+export const normalizeGuardianArticles = (articles: any[]): ArticleType[] => {
   return articles.map((article) => ({
     id: article.id,
     author: article.tags[0].webTitle || 'Unknown Author',
@@ -16,9 +14,7 @@ export const normalizeGuardianArticles = (
   }))
 }
 
-export const normalizeNewsApiArticles = (
-  articles: any[]
-): ArticleTypeUniformed[] => {
+export const normalizeNewsApiArticles = (articles: any[]): ArticleType[] => {
   return articles.map((article) => ({
     id: article.publishedAt,
     author: article.author || 'Unknown Author',
@@ -32,9 +28,7 @@ export const normalizeNewsApiArticles = (
   }))
 }
 
-export const normalizeNYTimesArticles = (
-  articles: any[]
-): ArticleTypeUniformed[] => {
+export const normalizeNYTimesArticles = (articles: any[]): ArticleType[] => {
   const imagesServer = 'https://static01.nyt.com'
   return articles.map((article) => {
     const image = article.multimedia.find(

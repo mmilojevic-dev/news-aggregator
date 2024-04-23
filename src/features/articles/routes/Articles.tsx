@@ -1,13 +1,23 @@
 import { ContentLayout } from '@/components'
-import { ARTICLES } from '@/config'
+import { articlesConfig } from '@/config'
 
 import { ArticlesList } from '../components/ArticlesList'
+import { Filters } from '../components/Filters'
+import { useArticles } from '../hooks/useArticles'
+import { FiltersFormSchemaType } from '../types'
 
 export const Articles = () => {
+  const { articles, status } = useArticles()
+
+  const handleFiltersChange = (filters: FiltersFormSchemaType) => {
+    console.log(filters)
+  }
+
   return (
-    <ContentLayout title={ARTICLES.TITLE}>
+    <ContentLayout title={articlesConfig.title}>
+      <Filters onFilterChange={handleFiltersChange} />
       <div className="mt-4">
-        <ArticlesList />
+        <ArticlesList articles={articles} status={status} />
       </div>
     </ContentLayout>
   )

@@ -30,7 +30,7 @@ export const Notification = ({
   onDismiss
 }: NotificationProps) => {
   return (
-    <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
+    <div className="flex w-full flex-col items-center space-y-4 md:items-end">
       <div
         className="pointer-events-auto w-full max-w-sm animate-slideIn overflow-hidden rounded-lg
           bg-background shadow-lg ring-1"

@@ -9,10 +9,10 @@ import {
   CardTitle
 } from '@/components'
 
-import { ArticleTypeUniformed } from '../types'
+import { ArticleType } from '../types'
 
 type ArticleProps = {
-  data?: ArticleTypeUniformed
+  data?: ArticleType
 }
 
 export const Article = ({ data }: ArticleProps) => {

@@ -24,25 +24,3 @@ export type NotificationType = {
   title: string
   message?: string
 }
-
-export type ParamsType = {
-  [key: string]: string
-}
-
-export type SourceConfigType = {
-  BASE_URL: string
-  ENDPOINT: string
-  PARAMS: {
-    DEFAULT: ParamsType
-  }
-}
-
-export enum SourceNameEnum {
-  Guardian = 'GUARDIAN',
-  NewsApi = 'NEWSAPI',
-  NYTimes = 'NYTIMES'
-}
-
-export type ArticlesSourceType = {
-  [key in SourceNameEnum]: SourceConfigType
-}

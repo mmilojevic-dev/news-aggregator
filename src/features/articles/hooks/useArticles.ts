@@ -4,7 +4,7 @@ import { AsyncStatusEnum } from '@/types'
 import { handleError } from '@/utils'
 
 import { getAllArticles } from '../api/getAllArticles'
-import { ArticleTypeUniformed } from '../types'
+import { ArticleType } from '../types'
 import {
   normalizeGuardianArticles,
   normalizeNewsApiArticles,
@@ -12,7 +12,7 @@ import {
 } from '../utils/responseNormalizers'
 
 export const useArticles = () => {
-  const [articles, setArticles] = React.useState<ArticleTypeUniformed[]>([])
+  const [articles, setArticles] = React.useState<ArticleType[]>([])
   const [status, setStatus] = React.useState<AsyncStatusEnum>(
     AsyncStatusEnum.Idle
   )

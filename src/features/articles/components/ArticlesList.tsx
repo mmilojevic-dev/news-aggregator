@@ -1,21 +1,23 @@
 import { List, LoadingFallback } from '@/components'
 import { AsyncStatusEnum } from '@/types'
 
-import { useArticles } from '../hooks/useArticles'
-import { ArticleTypeUniformed } from '../types'
+import { ArticleType } from '../types'
 import { Article } from './Article'
 
-export const ArticlesList = () => {
-  const { articles, status } = useArticles()
+type ArticlesListProps = {
+  articles: ArticleType[]
+  status: AsyncStatusEnum
+}
 
+export const ArticlesList = ({ articles, status }: ArticlesListProps) => {
   if (status === AsyncStatusEnum.Loading) {
-    return <LoadingFallback />
+    return <LoadingFallback className="mt-20" />
   }
 
   if (!articles) return null
 
   return (
-    <List<ArticleTypeUniformed>
+    <List<ArticleType>
       data={articles}
       renderItem={({ item }) => <Article key={item?.id} data={item} />}
     />

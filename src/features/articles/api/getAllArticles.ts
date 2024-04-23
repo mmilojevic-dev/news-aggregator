@@ -1,20 +1,20 @@
 import { getData } from '@/api/getData'
-import { ARTICLES } from '@/config'
+import { articlesConfig } from '@/config'
 
 export const getAllArticles = async () => {
   const [guardianResponse, newsApiResponse, nyTimesResponse] =
     await Promise.all([
       getData(
-        `${ARTICLES.SOURCE.GUARDIAN.BASE_URL}/${ARTICLES.SOURCE.GUARDIAN.ENDPOINT}`,
-        ARTICLES.SOURCE.GUARDIAN.PARAMS.DEFAULT
+        `${articlesConfig.sources.guardian.baseUrl}/${articlesConfig.sources.guardian.endpoint}`,
+        articlesConfig.sources.guardian.params
       ),
       getData(
-        `${ARTICLES.SOURCE.NEWSAPI.BASE_URL}/${ARTICLES.SOURCE.NEWSAPI.ENDPOINT}`,
-        ARTICLES.SOURCE.NEWSAPI.PARAMS.DEFAULT
+        `${articlesConfig.sources.newsApi.baseUrl}/${articlesConfig.sources.newsApi.endpoint}`,
+        articlesConfig.sources.newsApi.params
       ),
       getData(
-        `${ARTICLES.SOURCE.NYTIMES.BASE_URL}/${ARTICLES.SOURCE.NYTIMES.ENDPOINT}`,
-        ARTICLES.SOURCE.NYTIMES.PARAMS.DEFAULT
+        `${articlesConfig.sources.nyTimes.baseUrl}/${articlesConfig.sources.nyTimes.endpoint}`,
+        articlesConfig.sources.nyTimes.params
       )
     ])
   return {
