@@ -1,45 +1,51 @@
-import React from 'react'
+import { useQueries } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 
 import { AsyncStatusEnum } from '@/types'
 import { handleError } from '@/utils'
 
-import { getArticlesFromSource } from '../api/getAllArticles'
+import { getArticles } from '../api/getArticles'
 import { ArticleType, FiltersFormSchemaType, SourceNameEnum } from '../types'
-import {
-  normalizeGuardianArticles,
-  normalizeNewsApiArticles,
-  normalizeNYTimesArticles
-} from '../utils/responseNormalizers'
+import { normalizeArticles } from '../utils/responseNormalizers'
 
 export const useArticles = (filters: FiltersFormSchemaType) => {
-  const [articles, setArticles] = React.useState<ArticleType[]>([])
-  const [status, setStatus] = React.useState(AsyncStatusEnum.Idle)
+  const [articles, setArticles] = useState<ArticleType[]>([])
+  const [status, setStatus] = useState<AsyncStatusEnum>(AsyncStatusEnum.Idle)
 
-  React.useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        setStatus(AsyncStatusEnum.Loading)
-        const responses = await Promise.all([
-          getArticlesFromSource(SourceNameEnum.Guardian, filters),
-          getArticlesFromSource(SourceNameEnum.NewsApi, filters),
-          getArticlesFromSource(SourceNameEnum.NYTimes, filters)
-        ])
+  const queryResults = useQueries({
+    queries: Object.values(SourceNameEnum).map((source) => ({
+      queryKey: ['articles', source, JSON.stringify(filters)],
+      queryFn: () => getArticles(source, filters),
+      select: (data: any) => normalizeArticles(data, source),
+      onError: (error: Error) => {
+        handleError(new Error(`Error fetching data from ${source}:`, error))
+      }
+    }))
+  })
 
-        const normalizedArticles = [
-          ...normalizeGuardianArticles(responses[0].response.results),
-          ...normalizeNewsApiArticles(responses[1].articles),
-          ...normalizeNYTimesArticles(responses[2].response.docs)
-        ]
-        setArticles(normalizedArticles)
-        setStatus(AsyncStatusEnum.Success)
-      } catch (error) {
-        handleError(error)
-        setStatus(AsyncStatusEnum.Fail)
+  useEffect(() => {
+    const allArticles: ArticleType[] = []
+    let allSuccess = true
+    let anyLoading = false
+
+    for (const result of queryResults) {
+      if (result.isLoading) anyLoading = true
+      if (result.isError) allSuccess = false
+      if (result.status === 'success' && result.data) {
+        allArticles.push(...result.data)
       }
     }
 
-    fetchArticles()
-  }, [filters])
+    if (allSuccess && !anyLoading) {
+      allArticles.sort((a, b) => b.date.getTime() - a.date.getTime())
+      setArticles(allArticles)
+      setStatus(AsyncStatusEnum.Success)
+    } else if (anyLoading) {
+      setStatus(AsyncStatusEnum.Loading)
+    } else {
+      setStatus(AsyncStatusEnum.Fail)
+    }
+  }, [queryResults])
 
   return { articles, status }
 }

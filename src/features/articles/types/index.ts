@@ -16,6 +16,17 @@ export type ArticleType = {
   link: string
 }
 
+export type ArticleNormalizationType<T> = {
+  [Property in keyof T]: (article: any) => T[Property]
+}
+
+export type ParamMappingEntryType =
+  | string
+  | {
+      key: string
+      transform?: (value: any) => string
+    }
+
 export type FiltersFormSchemaType = z.infer<typeof filtersConfig.schema>
 
 export type FilterConfigType = {
@@ -39,13 +50,17 @@ export type FiltersConfigType = {
 
 export type QueryParamsType = Record<string, string>
 
+export type NormalizationConfigType = {
+  responseEntryPath: string
+  article: ArticleNormalizationType<ArticleType>
+}
+
 export type SourceConfigType = {
   baseUrl: string
   endpoint: string
   defaultParams: Record<string, string>
-  paramMappings: {
-    [key: string]: string | { key: string; transform?: (value: any) => string }
-  }
+  paramMappings: Record<string, ParamMappingEntryType>
+  normalization: NormalizationConfigType
 }
 
 export enum SourceNameEnum {

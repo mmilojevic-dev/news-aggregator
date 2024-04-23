@@ -80,6 +80,20 @@ export const guardianConfig: SourceConfigType = {
       transform: (date: Date) => date.toISOString().split('T')[0]
     },
     category: 'section'
+  },
+  normalization: {
+    responseEntryPath: 'response.results',
+    article: {
+      id: (article: any) => article.id,
+      author: (article: any) => article.tags[0]?.webTitle || 'Unknown Author',
+      category: (article: any) => article.pillarName || '',
+      date: (article: any) => new Date(article.webPublicationDate),
+      image: (article: any) => article.fields.thumbnail || '',
+      link: (article: any) => article.webUrl,
+      source: () => 'The Guardian',
+      text: (article: any) => article.fields.trailText || '',
+      title: (article: any) => article.webTitle || ''
+    }
   }
 }
 
@@ -100,6 +114,20 @@ const newsApiConfig: SourceConfigType = {
     toDate: {
       key: 'to',
       transform: (date: Date) => date.toISOString().split('T')[0]
+    }
+  },
+  normalization: {
+    responseEntryPath: 'articles',
+    article: {
+      id: (article: any) => article.publishedAt,
+      author: (article: any) => article.author || 'Unknown Author',
+      category: (article: any) => article.category || '',
+      date: (article: any) => new Date(article.publishedAt),
+      image: (article: any) => article.urlToImage || '',
+      link: (article: any) => article.url,
+      source: (article: any) => article.source.name,
+      text: (article: any) => article.description || '',
+      title: (article: any) => article.title || ''
     }
   }
 }
@@ -124,6 +152,23 @@ const nyTimesConfig: SourceConfigType = {
     category: {
       key: 'fq',
       transform: (category: string) => `news_desk:("${category}")`
+    }
+  },
+  normalization: {
+    responseEntryPath: 'response.docs',
+    article: {
+      id: (article: any) => article._id,
+      author: (article: any) =>
+        `${article.byline.person[0]?.firstname} ${article.byline.person[0]?.lastname}` ||
+        'Unknown Author',
+      category: (article: any) => article.subsection_name || '',
+      date: (article: any) => new Date(article.pub_date),
+      image: (article: any) =>
+        `https://static01.nyt.com/${article.multimedia?.find((media: any) => media.subtype === 'thumbLarge')?.url || ''}`,
+      link: (article: any) => article.web_url,
+      source: () => 'NYTimes',
+      text: (article: any) => article.lead_paragraph || '',
+      title: (article: any) => article.headline.main || ''
     }
   }
 }

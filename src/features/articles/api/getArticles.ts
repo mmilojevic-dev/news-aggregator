@@ -1,10 +1,10 @@
-import { getData } from '@/api/getData'
+import { axiosClient } from '@/lib/axios'
 
 import { articlesConfig } from '../config'
 import { FiltersFormSchemaType, SourceNameEnum } from '../types'
 import { mapFiltersToApiParams } from '../utils/filtersMapper'
 
-export const getArticlesFromSource = async (
+export const getArticles = async (
   source: SourceNameEnum,
   filters: FiltersFormSchemaType
 ) => {
@@ -12,5 +12,7 @@ export const getArticlesFromSource = async (
   const params = mapFiltersToApiParams(filters, source)
   const fullParams = { ...sourceConfig.defaultParams, ...params }
 
-  return getData(`${sourceConfig.baseUrl}/${sourceConfig.endpoint}`, fullParams)
+  return axiosClient.get(`${sourceConfig.baseUrl}/${sourceConfig.endpoint}`, {
+    params: fullParams
+  })
 }

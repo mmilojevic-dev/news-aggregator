@@ -1,52 +1,24 @@
-import { ArticleType } from '../types'
+import { getNestedProperty } from '@/utils'
 
-export const normalizeGuardianArticles = (articles: any[]): ArticleType[] => {
-  return articles.map((article) => ({
-    id: article.id,
-    author: article.tags[0]?.webTitle || 'Unknown Author',
-    category: article.pillarName || '',
-    date: new Date(article.webPublicationDate),
-    image: article.fields.thumbnail || '',
-    link: article.webUrl || '',
-    source: 'The Guardian',
-    text: article.fields.trailText || '',
-    title: article?.webTitle || ''
+import { sourcesConfig } from '../config'
+import { ArticleType, SourceNameEnum } from '../types'
+
+export const normalizeArticles = (
+  data: unknown[],
+  source: SourceNameEnum
+): ArticleType[] => {
+  const config = sourcesConfig[source].normalization
+  const articles = getNestedProperty(data, config.responseEntryPath) || []
+
+  return articles.map((article: unknown) => ({
+    id: config.article.id(article),
+    author: config.article.author(article),
+    category: config.article.category(article),
+    date: config.article.date(article),
+    image: config.article.image(article),
+    link: config.article.link(article),
+    source: config.article.source(article),
+    text: config.article.text(article),
+    title: config.article.title(article)
   }))
-}
-
-export const normalizeNewsApiArticles = (articles: any[]): ArticleType[] => {
-  return articles.map((article) => ({
-    id: article.publishedAt,
-    author: article.author || 'Unknown Author',
-    category: article.category || '',
-    date: new Date(article.publishedAt),
-    image: article.urlToImage || '',
-    link: article.url || '',
-    source: article.source.name,
-    text: article.description || '',
-    title: article.title || ''
-  }))
-}
-
-export const normalizeNYTimesArticles = (articles: any[]): ArticleType[] => {
-  const imagesServer = 'https://static01.nyt.com'
-  return articles.map((article) => {
-    const image = article.multimedia.find(
-      (media: any) => media.subtype === 'thumbLarge'
-    )
-
-    return {
-      id: article._id,
-      author:
-        `${article.byline.person[0]?.firstname} ${article.byline.person[0]?.lastname}` ||
-        'Unknown Author',
-      category: article.subsection_name || '',
-      date: new Date(article.pub_date),
-      image: `${imagesServer}/${image?.url || ''}`,
-      link: article.web_url || '',
-      source: article.source || '',
-      text: article.lead_paragraph || '',
-      title: article.headline.main || ''
-    }
-  })
 }
