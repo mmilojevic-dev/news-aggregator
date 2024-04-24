@@ -34,6 +34,11 @@ export const sourceFilterConfig: FilterConfigType = {
   }))
 }
 
+export const authorFilterConfig: FilterConfigType = {
+  name: 'author',
+  placeholder: 'Filter by author:'
+}
+
 export const fromDateFilterConfig: FilterConfigType = {
   name: 'fromDate',
   placeholder: 'From date:'
@@ -48,6 +53,7 @@ export const filtersConfig: FiltersConfigType = {
   schema: z.object({
     search: z.string().optional(),
     category: z.string().optional(),
+    author: z.string().optional(),
     source: z.nativeEnum(SourceNameEnum).optional(),
     fromDate: z.date().optional(),
     toDate: z.date().optional()
@@ -55,7 +61,8 @@ export const filtersConfig: FiltersConfigType = {
   default: {
     search: '',
     category: '',
-    source: undefined,
+    author: '',
+    source: '',
     fromDate: undefined,
     toDate: undefined
   },
@@ -63,6 +70,7 @@ export const filtersConfig: FiltersConfigType = {
     search: searchFilterConfig,
     category: categoryFilterConfig,
     source: sourceFilterConfig,
+    author: authorFilterConfig,
     fromDate: fromDateFilterConfig,
     toDate: toDateFilterConfig
   }

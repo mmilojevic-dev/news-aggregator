@@ -39,15 +39,18 @@ export const useArticles = (filters: FiltersFormSchemaType) => {
     }
 
     if (allSuccess && !anyLoading) {
-      allArticles.sort((a, b) => b.date.getTime() - a.date.getTime())
-      setArticles(allArticles)
+      const filteredClientSide = allArticles.filter((article) =>
+        article.author.toLowerCase().includes(filters.author.toLowerCase())
+      )
+      filteredClientSide.sort((a, b) => b.date.getTime() - a.date.getTime())
+      setArticles(filteredClientSide)
       setStatus(AsyncStatusEnum.Success)
     } else if (anyLoading) {
       setStatus(AsyncStatusEnum.Loading)
     } else {
       setStatus(AsyncStatusEnum.Fail)
     }
-  }, [queryResults])
+  }, [queryResults, filters.author])
 
   return { articles, status }
 }

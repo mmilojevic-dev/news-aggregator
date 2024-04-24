@@ -16,6 +16,7 @@ export enum FilterEnum {
   Search = 'search',
   Category = 'category',
   Source = 'source',
+  Author = 'author',
   FromDate = 'fromDate',
   ToDate = 'toDate'
 }

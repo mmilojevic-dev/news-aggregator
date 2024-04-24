@@ -1,2 +1,2 @@
-export * from './useFilterOptions'
 export * from './useFilters'
+export * from './usePreferredOptions'

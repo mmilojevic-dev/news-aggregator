@@ -116,9 +116,9 @@ const nyTimesConfig: SourceConfigType = {
       category: (article: any) => article.subsection_name || '',
       date: (article: any) => new Date(article.pub_date),
       image: (article: any) =>
-        article.multimedia?.find((media: any) => media.subtype === 'wide')
+        article.multimedia?.find((media: any) => media.subtype === 'popup')
           ?.url &&
-        `https://static01.nyt.com/${article.multimedia?.find((media: any) => media.subtype === 'wide')?.url || placeholderImage}`,
+        `https://static01.nyt.com/${article.multimedia?.find((media: any) => media.subtype === 'popup')?.url || placeholderImage}`,
       link: (article: any) => article.web_url || '',
       source: () => nyTimesConfig.domainName,
       text: (article: any) => article.lead_paragraph || '',

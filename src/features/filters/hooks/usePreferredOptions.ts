@@ -4,20 +4,27 @@ import { useSelector } from 'react-redux'
 import { categoryFilterConfig, sourceFilterConfig } from '@/features/filters'
 import { selectPreferences } from '@/store/preferencesSlice'
 
-export const useFilterOptions = () => {
+export const usePreferredOptions = () => {
   const preferences = useSelector(selectPreferences)
 
-  const filteredCategories = React.useMemo(() => {
+  const preferredCategories = React.useMemo(() => {
     return categoryFilterConfig.options!.filter((option) =>
       preferences.categories.includes(option.value)
     )
   }, [preferences.categories])
 
-  const filteredSources = React.useMemo(() => {
+  const preferredSources = React.useMemo(() => {
     return sourceFilterConfig.options!.filter((option) =>
       preferences.sources.includes(option.value)
     )
   }, [preferences.sources])
 
-  return { filteredCategories, filteredSources }
+  const preferredAuthors = React.useMemo(() => {
+    return preferences.authors.map((author) => ({
+      label: author,
+      value: author
+    }))
+  }, [preferences.authors])
+
+  return { preferredCategories, preferredSources, preferredAuthors }
 }
