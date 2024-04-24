@@ -2,7 +2,7 @@ import { List, LoadingFallback } from '@/components'
 import { AsyncStatusEnum } from '@/types'
 
 import { ArticleType } from '../types'
-import { Article } from './Article'
+import Article from './Article'
 
 type ArticlesListProps = {
   articles: ArticleType[]

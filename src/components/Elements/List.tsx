@@ -1,16 +1,18 @@
 import { ArchiveIcon } from 'lucide-react'
 import React from 'react'
 
-type ItemType<T> = {
-  isLoading?: boolean
-  item?: T
-}
-
 type ListProps<T> = {
   data?: T[]
   isLoading?: boolean
-  renderItem: ({ item, isLoading }: ItemType<T>) => React.ReactElement
+  renderItem: ({
+    item,
+    isLoading
+  }: {
+    item: T
+    isLoading?: boolean
+  }) => React.ReactElement
 }
+
 export const List = <T,>({ data, isLoading, renderItem }: ListProps<T>) => {
   if (!data?.length) {
     return (
@@ -21,10 +23,10 @@ export const List = <T,>({ data, isLoading, renderItem }: ListProps<T>) => {
     )
   }
 
-  const items = data?.map((item) => renderItem({ item, isLoading }))
+  const items = data.map((item) => renderItem({ item, isLoading }))
 
   return (
-    <div className="grid auto-rows-fr gap-5 lg:grid-cols-2 2xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {items}
     </div>
   )

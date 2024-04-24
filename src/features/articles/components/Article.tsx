@@ -6,6 +6,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
+  CardImage,
   CardTitle
 } from '@/components'
 
@@ -15,27 +16,27 @@ type ArticleProps = {
   data?: ArticleType
 }
 
-export const Article = ({ data }: ArticleProps) => {
+const Article = ({ data }: ArticleProps) => {
   return (
-    <Link to={data?.link ?? ''} target="_blank">
-      <Card className="flex h-full flex-col justify-between gap-4 transition-colors hover:border-accent">
-        <CardHeader className="mx-auto flex-col items-center justify-center">
-          <div className="flex size-full max-w-[345px]">
-            <img src={data?.image} className="h-auto max-w-full" />
-          </div>
+    <Link to={data?.link || '#'} target="_blank" className="block">
+      <Card className="flex h-full flex-col gap-4">
+        <CardHeader className="h-48 overflow-hidden">
+          <CardImage src={data?.image} alt={data?.title} />
         </CardHeader>
-        <div className="flex flex-col gap-2 px-6">
-          <CardTitle className="text-xl leading-6">{data?.title}</CardTitle>
-          <CardDescription>{data?.date.toLocaleString()}</CardDescription>
-        </div>
-        <CardContent>
-          <p>{data?.text}</p>
+        <CardContent className="grow">
+          <CardTitle className="leading-5">{data?.title}</CardTitle>
+          <p className="mt-2">{data?.date.toLocaleString()}</p>
+          <CardDescription className="line-clamp-5">
+            {data?.text}
+          </CardDescription>
         </CardContent>
-        <CardFooter className="justify-between">
-          <p>{data?.author}</p>
-          <p>{data?.source}</p>
+        <CardFooter className="mt-auto">
+          <p className="text-sm">{data?.author}</p>
+          <p className="text-sm">{data?.source}</p>
         </CardFooter>
       </Card>
     </Link>
   )
 }
+
+export default Article
