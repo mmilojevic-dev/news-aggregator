@@ -1,78 +1,48 @@
-import { List, Target } from 'lucide-react'
+import { List, Settings, Target } from 'lucide-react'
 
-import { FeedData, ThemeEnum } from '@/types'
+import { ThemeEnum } from '@/types'
 
-export const APP_DEFAULT = {
-  AUTHOR: 'Miloš Milojević',
-  DESCRIPTION:
+export const appDefaultConfig = {
+  author: 'Miloš Milojević',
+  description:
     'News aggregator website that pulls articles from various sources and displays them in a clean, easy-to-read format.',
-  TITLE: 'News Aggregator',
-  VERSION: '1.0.0',
-  GITHUB_REPO_URL: 'https://github.com/mmilojevic-dev/news-aggregator',
-  LOGO: Target
+  title: 'News Aggregator',
+  version: '1.0.0',
+  github: 'https://github.com/mmilojevic-dev/news-aggregator',
+  logo: Target
 }
 
-export const ROUTES = {
-  PUBLIC: {
-    NEWS: {
-      LABEL: '',
-      PATH: 'news',
-      NAV_ITEM: true,
-      ICON: null
+export const routesConfig = {
+  public: {
+    feed: {
+      label: '',
+      path: 'feed',
+      navItem: false,
+      icon: null
     },
-    FEED: {
-      LABEL: 'FEED',
-      PATH: '',
-      NAV_ITEM: false,
-      ICON: List
+    articles: {
+      label: 'FEED',
+      path: '',
+      navItem: true,
+      icon: List
+    },
+    preferences: {
+      label: 'PREFERENCES',
+      path: 'preferences',
+      navItem: true,
+      icon: Settings
     }
   }
 }
 
-export const THEME = {
-  TOGGLER_LABEL: 'Toggle theme',
-  INITIAL: ThemeEnum.System,
-  LOCAL_STORAGE_KEY: 'theme'
+export const themeConfig = {
+  togglerLabel: 'Toggle theme',
+  initial: ThemeEnum.System,
+  localStorageKey: 'theme'
 }
 
-export const FEED: { TITLE: string; DATA: FeedData } = {
-  TITLE: 'Feed',
-  DATA: {
-    GUARDIAN: {
-      QUERY_KEY: 'guardian',
-      BASE_URL: 'https://content.guardianapis.com/',
-      ENDPOINT: 'search',
-      PARAMS: {
-        API_KEY: {
-          NAME: 'api-key',
-          VALUE: process.env.REACT_APP_GUARDIAN_API_KEY || ''
-        },
-        SEARCH: {
-          NAME: 'q',
-          VALUE: ''
-        }
-      }
-    },
-    NEWSAPI: {
-      QUERY_KEY: 'newsapi',
-      BASE_URL: 'https://newsapi.org/v2/',
-      ENDPOINT: 'everything',
-      PARAMS: {
-        API_KEY: {
-          NAME: 'apiKey',
-          VALUE: process.env.REACT_APP_NEWSAPI_API_KEY || ''
-        },
-        SEARCH: {
-          NAME: 'q',
-          VALUE: ''
-        }
-      }
-    }
-  }
-}
-
-export const ERRORS = {
-  GENERAL_NETWORK: 'Network Error',
-  FALLBACK_TEXT: 'Ooops, something went wrong:',
-  FALLBACK_BUTTON_LABEL: 'Refresh'
+export const errorsConfig = {
+  errorTitle: 'Network Error',
+  fallbackText: 'Ooops, something went wrong:',
+  fallbackButtonLabel: 'Refresh'
 }

@@ -23,5 +23,9 @@ export const List = <T,>({ data, isLoading, renderItem }: ListProps<T>) => {
 
   const items = data?.map((item) => renderItem({ item, isLoading }))
 
-  return <div className="flex flex-col gap-4">{items}</div>
+  return (
+    <div className="grid auto-rows-fr gap-5 lg:grid-cols-2 2xl:grid-cols-3">
+      {items}
+    </div>
+  )
 }

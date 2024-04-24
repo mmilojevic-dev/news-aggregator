@@ -1,21 +1,23 @@
 import React from 'react'
 
 import { NavLink } from '@/components'
-import { ROUTES } from '@/config'
+import { routesConfig } from '@/config'
 
 export const Navigation: React.FC = () => {
   const navigationItems = React.useMemo(
     () =>
-      Object.keys(ROUTES.PUBLIC)
-        .map((key) => ROUTES.PUBLIC[key as keyof typeof ROUTES.PUBLIC])
-        .filter((route) => !route.NAV_ITEM),
+      Object.keys(routesConfig.public)
+        .map(
+          (key) => routesConfig.public[key as keyof typeof routesConfig.public]
+        )
+        .filter((route) => route.navItem),
     []
   )
 
   return (
     <nav className="flex-1 space-y-1 px-2 py-4">
       {navigationItems.map((route) => (
-        <NavLink key={route.PATH} route={route} />
+        <NavLink key={route.path} route={route} />
       ))}
     </nav>
   )

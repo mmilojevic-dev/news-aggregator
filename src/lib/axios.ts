@@ -1,73 +1,37 @@
-import Axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
+import axios, { InternalAxiosRequestConfig } from 'axios'
+import { AxiosResponse } from 'axios'
 
-import { ERRORS, FEED } from '@/config'
-import { store } from '@/store'
-import { addNotification } from '@/store'
-import {
-  DataSourceConfigType,
-  DataSourceNameEnum,
-  FeedData,
-  NotificationEnum
-} from '@/types'
-import { getErrorMessage } from '@/utils/errors'
+import { errorsConfig } from '@/config'
+import { addNotification, store } from '@/store'
+import { NotificationEnum } from '@/types'
+import { getErrorMessage } from '@/utils'
 
-type AxiosInstances = {
-  [key in DataSourceNameEnum]: AxiosInstance
-}
-
-const cachedInstances: Partial<AxiosInstances> = {}
-
-const handleError = (error: Error) => {
+const handleError = (error: any) => {
   store.dispatch(
     addNotification(
       NotificationEnum.Error,
-      ERRORS.GENERAL_NETWORK,
+      errorsConfig.errorTitle,
       getErrorMessage(error)
     )
   )
-  return Promise.reject(error)
 }
 
-const setupRequestInterceptor = (
-  instance: AxiosInstance,
-  dataSourceConfig: DataSourceConfigType
-) => {
-  instance.interceptors.request.use(
-    (axiosConfig: InternalAxiosRequestConfig) => {
-      axiosConfig.params = {
-        ...axiosConfig.params,
-        [dataSourceConfig.PARAMS.API_KEY.NAME]:
-          dataSourceConfig.PARAMS.API_KEY.VALUE
-      }
-      return axiosConfig
-    },
-    handleError
-  )
-}
-
-const setupResponseInterceptor = (instance: AxiosInstance) => {
-  instance.interceptors.response.use((response) => response.data, handleError)
-}
-
-const createAxiosInstance = (baseUrl: string) => {
-  return Axios.create({
-    baseURL: baseUrl,
-    headers: {
-      Accept: 'application/json'
-    }
-  })
-}
-
-export const getAxiosInstance = (dataSourceName: keyof FeedData) => {
-  const dataSourceConfig: DataSourceConfigType = FEED.DATA[dataSourceName]
-  if (!cachedInstances[dataSourceName]) {
-    const instance = createAxiosInstance(dataSourceConfig.BASE_URL)
-
-    setupRequestInterceptor(instance, dataSourceConfig)
-    setupResponseInterceptor(instance)
-
-    cachedInstances[dataSourceName] = instance
+export const axiosClient = axios.create({
+  headers: {
+    Accept: 'application/json'
   }
+})
 
-  return cachedInstances[dataSourceName]!
+const requestInterceptor = (
+  config: InternalAxiosRequestConfig
+): InternalAxiosRequestConfig => {
+  return config
 }
+
+const responseSuccessHandler = (response: AxiosResponse): any => {
+  return response.data
+}
+
+axiosClient.interceptors.request.use(requestInterceptor, handleError)
+
+axiosClient.interceptors.response.use(responseSuccessHandler, handleError)
