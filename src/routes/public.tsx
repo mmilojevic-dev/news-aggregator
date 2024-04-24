@@ -1,7 +1,10 @@
 import { routesConfig } from '@/config'
-import { LayoutProvider } from '@/providers'
 import { lazyImport } from '@/utils'
 
+const { LayoutProvider } = lazyImport(
+  () => import('@/providers'),
+  'LayoutProvider'
+)
 const { Articles } = lazyImport(() => import('@/features'), 'Articles')
 const { Preferences } = lazyImport(() => import('@/features'), 'Preferences')
 

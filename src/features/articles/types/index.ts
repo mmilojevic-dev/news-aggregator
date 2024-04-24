@@ -48,7 +48,7 @@ export type SourceConfigType = {
 }
 
 export const articlesConfig: ArticlesConfigType = {
-  title: 'Articles',
+  title: 'Feed',
   filters: filtersConfig,
   sources: sourcesConfig
 }

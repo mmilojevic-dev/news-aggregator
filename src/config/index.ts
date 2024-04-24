@@ -21,7 +21,7 @@ export const routesConfig = {
       icon: null
     },
     articles: {
-      label: 'ARTICLES',
+      label: 'FEED',
       path: '',
       navItem: true,
       icon: List
