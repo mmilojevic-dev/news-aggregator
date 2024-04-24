@@ -19,9 +19,13 @@ type ArticleProps = {
 const Article = ({ data }: ArticleProps) => {
   return (
     <Link to={data?.link || '#'} target="_blank" className="block">
-      <Card className="flex h-full flex-col gap-4">
-        <CardHeader className="h-48 overflow-hidden">
-          <CardImage src={data?.image} alt={data?.title} />
+      <Card className="flex h-full flex-col gap-4 transition-colors hover:border-accent">
+        <CardHeader className="h-48 overflow-hidden p-0">
+          <CardImage
+            src={data?.image}
+            alt={data?.title}
+            className="rounded-lg"
+          />
         </CardHeader>
         <CardContent className="grow">
           <CardTitle className="leading-5">{data?.title}</CardTitle>
