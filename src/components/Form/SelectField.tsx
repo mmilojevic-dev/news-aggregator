@@ -31,7 +31,11 @@ export const SelectField = ({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <Select
+          disabled={!options.length}
+          onValueChange={field.onChange}
+          defaultValue={field.value}
+        >
           <FormControl>
             <SelectTrigger
               className={cn(!field.value && 'text-muted-foreground')}

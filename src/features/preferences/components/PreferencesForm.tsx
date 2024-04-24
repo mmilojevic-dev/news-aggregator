@@ -3,7 +3,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, CheckboxGroupField, Form, InputTagsField } from '@/components'
+import { CheckboxGroupField, Form, InputTagsField } from '@/components'
 import { categoryFilterConfig, sourceFilterConfig } from '@/features/filters'
 import { useDebounce } from '@/hooks' // Make sure the path is correct
 import { selectPreferences, setPreferences } from '@/store/preferencesSlice'
@@ -48,12 +48,6 @@ const PreferencesForm = () => {
             placeholder="Select Sources"
             options={sourceFilterConfig.options!}
           />
-        </div>
-
-        <div className="text-center">
-          <Button variant="secondary" type="submit">
-            Save Preferences
-          </Button>
         </div>
       </form>
     </Form>

@@ -1,5 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit'
 
+import placeholderImage from '@/assets/images/placeholder_image.svg'
 import { SourceNameEnum } from '@/types'
 
 import { SourceConfigType } from '../types'
@@ -35,7 +36,7 @@ export const guardianConfig: SourceConfigType = {
       author: (article: any) => article.tags[0]?.webTitle || 'Unknown Author',
       category: (article: any) => article.pillarName || '',
       date: (article: any) => new Date(article.webPublicationDate),
-      image: (article: any) => article.fields.thumbnail || '',
+      image: (article: any) => article.fields.thumbnail || placeholderImage,
       link: (article: any) => article.webUrl,
       source: () => guardianConfig.domainName,
       text: (article: any) => article.fields.trailText || '',
@@ -72,7 +73,7 @@ const newsApiConfig: SourceConfigType = {
       author: (article: any) => article.author || 'Unknown Author',
       category: (article: any) => article.category || '',
       date: (article: any) => new Date(article.publishedAt),
-      image: (article: any) => article.urlToImage || '',
+      image: (article: any) => article.urlToImage || placeholderImage,
       link: (article: any) => article.url || '',
       source: () => newsApiConfig.domainName,
       text: (article: any) => article.description || '',
@@ -115,7 +116,9 @@ const nyTimesConfig: SourceConfigType = {
       category: (article: any) => article.subsection_name || '',
       date: (article: any) => new Date(article.pub_date),
       image: (article: any) =>
-        `https://static01.nyt.com/${article.multimedia?.find((media: any) => media.subtype === 'thumbLarge')?.url || ''}`,
+        article.multimedia?.find((media: any) => media.subtype === 'wide')
+          ?.url &&
+        `https://static01.nyt.com/${article.multimedia?.find((media: any) => media.subtype === 'wide')?.url || placeholderImage}`,
       link: (article: any) => article.web_url || '',
       source: () => nyTimesConfig.domainName,
       text: (article: any) => article.lead_paragraph || '',

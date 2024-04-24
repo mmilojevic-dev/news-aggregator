@@ -1,12 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
 
-import {
-  Button,
-  DatePickerField,
-  Form,
-  InputField,
-  SelectField
-} from '@/components'
+import { DatePickerField, Form, InputField, SelectField } from '@/components'
 
 import {
   categoryFilterConfig,
@@ -15,6 +9,7 @@ import {
   sourceFilterConfig,
   toDateFilterConfig
 } from '../config'
+import { useFilterOptions } from '../hooks'
 import { FiltersFormSchemaType } from '../types'
 
 type FiltersProps = {
@@ -22,10 +17,7 @@ type FiltersProps = {
 }
 
 export const Filters = ({ form }: FiltersProps) => {
-  const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    form.reset()
-  }
+  const { filteredCategories, filteredSources } = useFilterOptions()
 
   return (
     <Form {...form}>
@@ -40,13 +32,13 @@ export const Filters = ({ form }: FiltersProps) => {
             form={form}
             name={categoryFilterConfig.name}
             placeholder={categoryFilterConfig.placeholder}
-            options={categoryFilterConfig.options!}
+            options={filteredCategories}
           />
           <SelectField
             form={form}
             name={sourceFilterConfig.name}
             placeholder={sourceFilterConfig.placeholder}
-            options={sourceFilterConfig.options!}
+            options={filteredSources}
           />
         </div>
         <div className="grid grid-cols-3 gap-x-2">
@@ -60,11 +52,6 @@ export const Filters = ({ form }: FiltersProps) => {
             name={toDateFilterConfig.name}
             placeholder={toDateFilterConfig.placeholder}
           />
-          <div className="text-right">
-            <Button onClick={handleReset} variant="outline">
-              Reset filters
-            </Button>
-          </div>
         </div>
       </form>
     </Form>

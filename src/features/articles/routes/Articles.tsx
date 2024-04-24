@@ -6,7 +6,7 @@ import { ArticlesList } from '../components'
 import { useArticles } from '../hooks'
 
 export const Articles = () => {
-  const { form, filters } = useFilters()
+  const { filters, form } = useFilters()
   const { articles, status } = useArticles(filters)
 
   return (
