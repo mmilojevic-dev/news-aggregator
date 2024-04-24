@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { SelectOptionType } from '@/types'
+import { OptionType } from '@/types'
 
 import { filtersConfig } from '../config'
 
@@ -9,7 +9,7 @@ export type FiltersFormSchemaType = z.infer<typeof filtersConfig.schema>
 export type FilterConfigType = {
   name: string
   placeholder: string
-  options?: SelectOptionType[]
+  options?: OptionType[]
 }
 
 export enum FilterEnum {

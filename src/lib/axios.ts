@@ -1,7 +1,20 @@
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import { AxiosResponse } from 'axios'
 
-import { handleError } from '@/utils'
+import { errorsConfig } from '@/config'
+import { addNotification, store } from '@/store'
+import { NotificationEnum } from '@/types'
+import { getErrorMessage } from '@/utils'
+
+const handleError = (error: any) => {
+  store.dispatch(
+    addNotification(
+      NotificationEnum.Error,
+      errorsConfig.errorTitle,
+      getErrorMessage(error)
+    )
+  )
+}
 
 export const axiosClient = axios.create({
   headers: {

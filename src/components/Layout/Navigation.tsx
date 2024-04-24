@@ -10,7 +10,7 @@ export const Navigation: React.FC = () => {
         .map(
           (key) => routesConfig.public[key as keyof typeof routesConfig.public]
         )
-        .filter((route) => !route.navItem),
+        .filter((route) => route.navItem),
     []
   )
 

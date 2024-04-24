@@ -5,11 +5,14 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import { ErrorFallback, LoadingFallback, Notifications } from '@/components'
+import {
+  ErrorFallback,
+  LoadingFallback,
+  Notifications,
+  Theme
+} from '@/components'
 import { queryClient } from '@/lib'
 import { store } from '@/store'
-
-import { Theme } from './theme'
 
 type AppProviderProps = {
   children: React.ReactNode

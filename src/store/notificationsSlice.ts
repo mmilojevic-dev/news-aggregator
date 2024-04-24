@@ -2,6 +2,8 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 
 import { NotificationEnum, NotificationType } from '@/types'
 
+import { RootState } from './store'
+
 type NotificationState = {
   currentNotifications: NotificationType[]
 }
@@ -36,5 +38,6 @@ const notificationSlice = createSlice({
 })
 
 export const { addNotification, removeNotification } = notificationSlice.actions
-
+export const selectNotifications = (state: RootState) =>
+  state.notifications.currentNotifications
 export default notificationSlice.reducer

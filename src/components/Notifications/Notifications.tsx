@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Notification } from '@/components'
-import { AppDispatch, removeNotification, RootState } from '@/store'
+import { AppDispatch, removeNotification, selectNotifications } from '@/store'
 
 export const Notifications = () => {
-  const notifications = useSelector(
-    (state: RootState) => state.notifications.currentNotifications
-  )
+  const notifications = useSelector(selectNotifications)
   const dispatch = useDispatch<AppDispatch>()
 
   const dismissNotification = (id: string) => {

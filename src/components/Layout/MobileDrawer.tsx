@@ -15,7 +15,7 @@ type MobileDrawerProps = {
 export const MobileDrawer = ({ isOpen, setIsOpen }: MobileDrawerProps) => {
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
-      <DrawerContent className="w-56">
+      <DrawerContent className="w-full max-w-72">
         <DrawerHeader className="h-16 justify-center bg-background/50 px-4">
           <Logo withTitle />
         </DrawerHeader>

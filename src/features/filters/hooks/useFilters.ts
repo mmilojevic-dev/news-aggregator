@@ -9,7 +9,7 @@ import { useDebounce } from '@/hooks'
 import { filtersConfig } from '../config'
 import { FiltersFormSchemaType } from '../types'
 
-export const useFilters = (debounceDelay = 500) => {
+export const useFilters = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -41,7 +41,7 @@ export const useFilters = (debounceDelay = 500) => {
   })
 
   const filters = useWatch({ control: form.control })
-  const debouncedFilters = useDebounce(filters, debounceDelay)
+  const debouncedFilters = useDebounce(filters)
 
   useEffect(() => {
     const queryString = Object.entries(debouncedFilters)

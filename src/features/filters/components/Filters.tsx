@@ -61,7 +61,9 @@ export const Filters = ({ form }: FiltersProps) => {
             placeholder={toDateFilterConfig.placeholder}
           />
           <div className="text-right">
-            <Button onClick={handleReset}>Reset</Button>
+            <Button onClick={handleReset} variant="outline">
+              Reset filters
+            </Button>
           </div>
         </div>
       </form>

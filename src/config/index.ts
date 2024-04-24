@@ -1,4 +1,4 @@
-import { List, Target } from 'lucide-react'
+import { List, Settings, Target } from 'lucide-react'
 
 import { ThemeEnum } from '@/types'
 
@@ -14,17 +14,23 @@ export const appDefaultConfig = {
 
 export const routesConfig = {
   public: {
-    home: {
+    feed: {
       label: '',
-      path: '',
-      navItem: true,
+      path: 'feed',
+      navItem: false,
       icon: null
     },
     articles: {
       label: 'ARTICLES',
       path: '',
-      navItem: false,
+      navItem: true,
       icon: List
+    },
+    preferences: {
+      label: 'PREFERENCES',
+      path: 'preferences',
+      navItem: true,
+      icon: Settings
     }
   }
 }

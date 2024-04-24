@@ -16,7 +16,7 @@ export const InputField = ({ form, name, placeholder }: InputFieldProps) => {
       name={name}
       render={({ field }) => (
         <FormControl>
-          <Input className="h-auto" placeholder={placeholder} {...field} />
+          <Input placeholder={placeholder} {...field} />
         </FormControl>
       )}
     />

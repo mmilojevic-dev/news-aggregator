@@ -1,4 +1,6 @@
+export * from './CheckboxGroupField'
 export * from './DatePickerField'
 export * from './Form'
 export * from './InputField'
+export * from './InputTagsField'
 export * from './SelectField'

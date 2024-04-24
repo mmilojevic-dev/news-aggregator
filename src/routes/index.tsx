@@ -8,11 +8,11 @@ export const AppRoutes = () => {
   const commonRoutes = [
     {
       path: '*',
-      element: <Navigate to="/" />
+      element: <Navigate to="/" replace />
     },
     {
       path: '/',
-      element: <Navigate to={`/${routesConfig.public.home.path}`} />
+      element: <Navigate to={`/${routesConfig.public.feed.path}`} replace />
     }
   ]
 
