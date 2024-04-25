@@ -34,7 +34,7 @@ const Article = ({ data }: ArticleProps) => {
             {data?.text}
           </CardDescription>
         </CardContent>
-        <CardFooter className="mt-auto">
+        <CardFooter className="mt-auto flex justify-between">
           <p className="text-sm">{data?.author}</p>
           <p className="text-sm">{data?.source}</p>
         </CardFooter>
