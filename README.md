@@ -78,7 +78,7 @@ To containerize the application, use the following commands:
 
 ```bash
 docker build -t news-aggregator .
-docker run -p 3000:80 news-aggregator
+docker run -p 8080:80 news-aggregator
 ```
 
 This will build and run the Docker container, making the app accessible at http://localhost:3000.
